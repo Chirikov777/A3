@@ -1,0 +1,77 @@
+<!--
+WEB322 Assignment 3
+Stan's Gallery - 7 Wonders
+Author: Stanislav Chirikov
+Student ID 074631128
+Used materials: https://www.iflscience.com/the-seven-wonders-of-the-ancient-world-and-where-to-find-them-68477
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Stan's Gallery - The Seven Wonders</title>
+		<style>
+			div#divUsername
+			{
+				color: #00f;
+				opacity: 1;
+				top: 0;
+				transition: opacity 1s ease-out;
+				position: absolute;
+			}
+			div#divLogout
+			{
+				left: 0;
+				top: 0;
+				position: absolute;
+			}
+			a#aLogout
+			{
+				opacity: 0;
+				text-decoration: underline;
+				transition: opacity 1s ease-in;
+			}
+			div.clsUsernameLogout:hover div#divUsername
+			{
+				opacity: 0;
+			}
+			div.clsUsernameLogout:hover a#aLogout
+			{
+				opacity: 1;
+			}
+		</style>
+	</head>
+
+	<body>
+		{{#with data}}
+		<form method="get" action="/">
+			<div class="clsUsernameLogout">
+				<div id="divUsername">{{login}}</div>
+				<div id="divLogout"><a id="aLogout"><button type="Submit" value="">Logout</button></a></div>
+			</div>
+		</form>
+		<form method="post" action="/gallery">
+			{{>header}}
+			<div>
+				<select name="chooseImage">
+						<option value=""></option>
+                    {{#each imageList}}
+                        <option value="{{.}}">{{.}}</option>
+                    {{/each}}
+				</select>
+				<button type="Submit" value="Submit">Submit</button>
+			</div>
+		</form>
+			<div>
+				<img src="{{imagePath}}" alt="Image not found"/>
+			</div>
+			<div>
+				{{imageTitle}}
+			</div>
+			<form method="post" action="/buy">
+				<button type="Submit" name="buyImage" value="{{imagePath}}+{{imageDescription}}={{imagePrice}}">Buy</button>
+			</form>
+		{{/with}}
+	</body>
+</html>

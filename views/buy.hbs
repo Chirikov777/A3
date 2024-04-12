@@ -1,0 +1,50 @@
+<!--
+WEB322 Assignment 3
+Stan's Gallery - 7 Wonders
+Author: Stanislav Chirikov
+Student ID 074631128
+Used materials: https://www.iflscience.com/the-seven-wonders-of-the-ancient-world-and-where-to-find-them-68477
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Stan's Gallery - The Seven Wonders - Buy a print</title>
+	</head>
+
+	<body>
+		{{#with data}}
+		<form method="post" action="/gallery">
+            {{>header}}
+			<h2>Buy a print</h2>
+		</form>
+			<div>
+				<img src="{{imagePath}}" alt="Image not found"/>
+			</div>
+			<div>
+				{{imageTitle}}
+			</div>
+            <div>
+				{{imageDescription}}
+			</div>
+            <div>
+				{{imagePrice}}
+			</div>
+			<form id="transaction" method="post" action="/gallery/back_from_sale">
+                <button name="transaction" value="{{imageTitle}}+" onclick="buyImage()">Buy</button>
+                <button name="transaction" value="{{imageTitle}}-" onclick="dontBuy()">Cancel</button>
+			</form>
+		{{/with}}
+        <script>
+            function buyImage() {
+                alert('Sold');
+                 document.getElementById("transaction").submit();
+            }
+            function dontBuy() {
+                alert('Maybe next time');
+                document.getElementById("transaction").submit();
+            }
+        </script>
+	</body>
+</html>
